@@ -5,6 +5,8 @@
 [2017/10/16 v0.1 LaTeX template for Monash PhD milestone report, this is from my previous HKU MSc project report template]
 \typeout{Document class 'monashreport' v0.1 by Lai{2017/10}}
 
+\DeclareOption{confirmation}{\def\reporttype{Confirmation Report}}
+\DeclareOption{thesis}{\def\reporttype{Thesis}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions\relax
 
@@ -113,7 +115,6 @@
 }
 
 % student name
-\def\author{}
 \newcommand{\reportauthor}[1]{%
   \def\author{#1}
 }
@@ -148,6 +149,12 @@
   \def\universityname{#1}
 }
 
+% submission date
+\def\submissiondate{}
+\newcommand{\submission}[1]{%
+  \def\submissiondate{#1}
+}
+
 % Abstract
 \newenvironment{abstract}{%
 \clearpage
@@ -159,7 +166,7 @@
 }
 
 % Declaration
-\newcommand{\declaration}{%
+\newenvironment{declaration}{%
 \clearpage
 %\thispagestyle{empty}
 \vspace*{\baselineskip}
@@ -178,55 +185,43 @@
 \end{center}
 }
 
-% Redifine the title page
+% Redefine the title page
 \newcommand{\titlepg}{
 \begin{titlepage}
-\begin{center}
-\null\vskip1cm
-\begin{singlespace}
-\fontsize{12pt}{1.66\baselineskip}{\Huge\bf\expandafter\title}
-\end{singlespace}
-\vspace{48pt}
+	\begin{center}
+		\null\vskip1cm
+		\begin{singlespace}
+			\fontsize{24pt}{2.5\baselineskip}\selectfont{\textbf\textsf\title}
+		\end{singlespace}
+		\vfill
 
-\begin{singlespace}
-\fontsize{12pt}{\baselineskip}{Submitted in partial fulfillment of the requirements for the admission to\\ the degree of Master of Science in Computer Science}
-\end{singlespace}
-\vspace{60pt}
+		\begin{singlespace}
+			\fontsize{12pt}{1.66\baselineskip}\selectfont\textbf\textsf{A \reporttype\ submitted in fulfilment of the requirements for\\ the candidature of\\[0.3cm] Doctor of Philosophy}
+		\end{singlespace}
+		\vfill
 
-\begin{singlespace}
-\fontsize{12pt}{\baselineskip}{By}\\[0.2cm]
+		\begin{singlespace}
+			\fontsize{12pt}{\baselineskip}\selectfont\textbf\textsf{By}\\[0.6cm]
+			\fontsize{16pt}{\baselineskip}\selectfont\textbf\textsf{\author}\\[0.2cm]
+			\fontsize{12pt}{1.66\baselineskip}\selectfont\textbf\textsf{Supervisor: \supervisorname}\\
+			\ifdefempty{\cosupervisorname}{}{\textbf\textsf{Co-supervisor: \cosupervisorname}}
+		\end{singlespace}
 
-\fontsize{12pt}{\baselineskip}{\Huge\author}\\[0.6cm]
-\vspace{12pt}
-\fontsize{12pt}{\baselineskip}{Supervisor: \supervisorname}\\
-\vspace{8pt}
-\ifdefempty{\cosupervisorname}{}{\fontsize{12pt}{\baselineskip}{Co-supervisor: \cosupervisorname}}
-\end{singlespace}
+		\vfill\vfill
+		\IfFileExists{figure/logo.jpg}{\includegraphics[width=4cm]{logo.jpg}}
 
-\vspace{20pt}
-\IfFileExists{figure/logo.jpg}{\includegraphics[width=2in]{logo.jpg}}
+		\departmentname
+		
+		\facultyname
+		
+		\universityname
+		
+		\submissiondate
+	\end{center}
 
-\vspace{20pt}
-
-\fontsize{12pt}{\baselineskip}{\departmentname}
-\ifdefempty{\departmentname}{}{\vspace{12pt}}
-
-\fontsize{12pt}{\baselineskip}{\facultyname}
-\ifdefempty{\facultyname}{}{\vspace{12pt}}
-
-\fontsize{12pt}{\baselineskip}{\universityname}
-\ifdefempty{\universityname}{}{\vspace{12pt}}
-
-\begin{singlespace}
-\fontsize{12pt}{\baselineskip}{Date of submission: 01/08/2015}
-\end{singlespace}
-\vspace{12pt}
-
-\end{center}
-
-\IfFileExists{\include{data/abstract}}
-\IfFileExists{\include{data/declaration}}
-\IfFileExists{\include{data/acknowledgements}}
+	\IfFileExists{\include{data/abstract}}
+	\IfFileExists{\include{data/declaration}}
+	\IfFileExists{\include{data/acknowledgements}}
 
 \end{titlepage}
 }
