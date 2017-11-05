@@ -70,7 +70,12 @@
 \titlecontents{subsection}[4em]{\vspace{0.1\baselineskip}\normalsize}
 {\thecontentslabel\ }{}
      {\hspace{.5em}\titlerule*[4pt]{.}\contentspage}
-
+     
+%%%%%%%%chapter titles%%%%%%%%
+\RequirePackage{titlesec}
+\titleformat{\chapter}[display]{\Large\bfseries}{Chapter\ \thechapter\,}{0em}{}
+\titlespacing{\chapter}{0pt}{-0.2em}{0.8em}
+\titlespacing{\section}{0pt}{-0.2em}{0.8em}
 %%%%%%%%graphics%%%%%%%%
 \RequirePackage{graphicx}
 \RequirePackage{caption}
@@ -82,10 +87,11 @@
 \bibliographystyle{unsrt}
 \RequirePackage[numbers,sort&compress]{natbib}
 \renewcommand{\bibname}{References}
+\setlength{\bibsep}{0ex}
 
 %%%%%%%%other settings%%%%%%%%
 \RequirePackage{setspace}
-\hyphenation{techno-logy com-ponent}
+\hyphenation{techno-logy com-ponent cyber-space Twi-tter re-commendation}
 
 % front matter before main body
 \renewcommand{\frontmatter}{%

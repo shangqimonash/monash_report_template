@@ -1,6 +1,28 @@
 \chapter{Introduction}
+This report outlines the doctoral research on keeping sensitive data privacy in Online Social Network (OSN) by using 'searchable encryption' technique. 
+\section{Background of Problem}
+OSN is highly popular for many years. Services such as Facebook, Twitter and WeChat allow individuals to create online profiles, make cyberspace connection with others via these platforms. Although the main purposes of OSN are to help its members to communicate with others and maintain social relations in a more convenient and affordable way, OSN service providers also design diverse Social Network Services(SNS) for its user interaction virtually: it includes updating activities and location information, sharing multimedia (e.g. photo, video) and events, getting updates and comments on activities by friends, etc.. The volume of OSN functions are continually increased (e.g. blogging, interest group, location-based recommendation) and diversify into different focuses (e.g. job hunting, dating, entertainment).
 
-1. Social network data privacy issue;
-2. Solutions for social network data privacy;
-3. What's searchable encryption;
-4. Why searchable encryption can apply on social network search
+A result of the huge growth of SNS is more and more sensitive personal data is revealed while users enjoy using these SNS. In 2005, two researchers from Carnegie Mellon University conducted a study in the online behaviour of more than 4,000 students in the university who had signed up in Facebook \cite{gross2005information}. In their study, the majority of Facebook users at CMU provide astonishing amount of sensitive information in their Facebook profiles: it may contain their real names (over $90\%$), date of birth ($87\%$), personal images ($80\%$) and so on; actually. privacy preference settings are provided for OSN user to control the searchability, visibility and access privilege of their profiles, but it is sparingly used, which make them searchable and identifiable to the vast majority of anybody else in the network. 
+
+Due to the richness and variety of sensitive information disclosed in OSN, the privacy of these data is of critical importance to OSN users, as the permissive and unconcerned uses of sensitive information will put themselves at risk for many attacks from the cyberspace or even the real world: the precise personal information helps a potential adversary to construct more deceitful fraud messages (e.g. Context-Aware Spam \cite{brown2008social}); it also can be used to re-identify some anonymous datasets like hospital medical information by comparing common attributes; additionally, OSN users may be easily stalked as they revealed their location or timetable when they share their activities to their friends.
+
+There have been several schemes proposed to preserve the data privacy for data sharing in OSN: Guha et al. proposed NOYB \cite{guha2008noyb} which can break personal profile to multiple atoms and mix them into the crowd, it then provides confused profile to OSN. In this system, authorised users possess a part of secret can recover the real personal information associated with specific users while unauthorised users only get a mixture of personal data from the crowd. NOYB is able to protect the privacy of user profile but it doesn't work for user relations and interactions. 
+In comparison, Persona \cite{baden2009persona} solves above issue by applying cryptographic primitive (i.e. Attribute-based Encryption (ABE)). ABE can help to apply access control over a group of users in OSN. The ability to associate the attributes of user with a key provides a convenient way for group manager to grant different access privileges to different groups. Users within those groups use the key to access the group manager's sensitive data, so each group's access to the sensitive data is properly restricted, which guarantees the privacy of group manager. 
+
+3. The drawbacks of previous scheme
+
+Searchable Encryption (SE) aims to provide abundant search functionalities on the server side, without decrypting the data itself.
+\begin{itemize}
+\item Searchable Symmetric Encryption (SSE): Song et al. [5] proposed an efficient scheme for storing and retrieving encrypted data from remote database. The encryption and search algorithms only need O(n) (n is the size of query) to perform its work, and the scheme is indistinguishable against chosen plaintext attacks [6];
+\item Publickeyencryptionwithkeywordsearch(PEKS):TheschemeproposedbyBonehet al. [7] allows others to read the message (e.g. e-mail services). They further revised it [8] to hide access pattern from service providers. However, this approach?s overhead in search time is O(n2), far less efficient than SSE.
+\end{itemize}
+Curtmola et al. [9] extended definition of SSE because they found that the security of index and trapdoor has inherently link. To guarantee the keyword will not leak from trap- door, [9] introduced two new model, a non-adaptive and an adaptive one. The adaptive one allow query as a function of previously obtained trapdoors and search outcomes, and is considered a strong security scheme.
+Recently, Cash et al. [10] proposed dynamic and multi-keyword search in large database in cloud system. Cash?s work [10] encrypts a clear-text database to get encrypted database (EDB). By randomly storing data in database, the database can hide the relationship of clear- text database. Their evaluation shows the new search method is very effective for very large dataset (10s in MySQL database with terabytes-scale and billions of record-keyword pairs). Nonetheless, it also exists leakage in [10], as it discloses many information to server, and the server may be able to restore sensitive data of user.
+
+
+5. Summary the link between sensitive data privacy and Searchable Encryption 
+
+\section{Research Questions}
+
+\section{Significance of Research}
