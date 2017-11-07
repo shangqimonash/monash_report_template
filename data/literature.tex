@@ -1,2 +1,21 @@
 \chapter{Literature Review}
 
+\section{Privacy Preserving Scheme for OSN}
+There have been several schemes proposed to preserve the data privacy for data sharing in OSN: Guha et al. proposed NOYB \cite{guha2008noyb} which can break personal profile to multiple atoms and mix them into the crowd, it then provides confused profile to OSN. In this system, authorised users possess a part of secret can recover the real personal information associated with specific users while unauthorised users only get a mixture of personal data from the crowd. NOYB is able to protect the privacy of user profile but it doesn't work for user relations and interactions. 
+In comparison, Persona \cite{baden2009persona} solves above issue by applying cryptographic primitive (i.e. Attribute-based Encryption (ABE)). ABE can help to apply access control over a group of users in OSN. The ability to associate the attributes of user with a key provides a convenient way for group manager to grant different access privileges to different groups. Users within those groups use the key to access the group manager's sensitive data, so each group's access to the sensitive data is properly restricted, which guarantees the privacy of group manager. 
+As NOYB and Persona put encrypted content into OSN, OSN is hard to provide services to the users of these external tools. Lockr \cite{tootoonchian2009lockr} provides Social Attestation mechanism and Social Access Control Lists to control the access of sensitive data, hence, it can achieve fine-grained access control without data encryption. Furthermore, Social Attestation mechanism makes it easier for key revocation as it has a explicit expire date. In contrast, Persona needs to re-issue a new key to all remaining users in the group. Another benefit for using Lockr applies proof of knowledge protocol.
+ to ensures the non-transferability of sensitive data -- third parties sites cannot abuse these sensitive data because they will not receive the actual identifier of users under the protocol.
+ 
+There are lots of research works with various primitives aiming to preserve the sensitive data privacy in OSN, such as homomorphic encryption \cite{domingo2008privacy}, peer-to-peer (P2P) overlays \cite{cutillo2009safebook}. 
+
+\section{Searchable Encryption}
+Searchable Encryption (SE) aims to provide abundant search functionalities on the server side, without decrypting the data itself.
+\begin{itemize}
+\item Searchable Symmetric Encryption (SSE): Song et al. [5] proposed an efficient scheme for storing and retrieving encrypted data from remote database. The encryption and search algorithms only need O(n) (n is the size of query) to perform its work, and the scheme is indistinguishable against chosen plaintext attacks [6];
+\item Publickeyencryptionwithkeywordsearch(PEKS):TheschemeproposedbyBonehet al. [7] allows others to read the message (e.g. e-mail services). They further revised it [8] to hide access pattern from service providers. However, this approach?s overhead in search time is O(n2), far less efficient than SSE.
+\end{itemize}
+Curtmola et al. [9] extended definition of SSE because they found that the security of index and trapdoor has inherently link. To guarantee the keyword will not leak from trap- door, [9] introduced two new model, a non-adaptive and an adaptive one. The adaptive one allow query as a function of previously obtained trapdoors and search outcomes, and is considered a strong security scheme.
+Recently, Cash et al. [10] proposed dynamic and multi-keyword search in large database in cloud system. Cash?s work [10] encrypts a clear-text database to get encrypted database (EDB). By randomly storing data in database, the database can hide the relationship of clear- text database. Their evaluation shows the new search method is very effective for very large dataset (10s in MySQL database with terabytes-scale and billions of record-keyword pairs). Nonetheless, it also exists leakage in [10], as it discloses many information to server, and the server may be able to restore sensitive data of user.
+
+
+5. Summary the link between sensitive data privacy and Searchable Encryption 
