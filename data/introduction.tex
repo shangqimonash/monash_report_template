@@ -1,17 +1,59 @@
 \chapter{Research Problem}
-This report outlines the doctoral research on keeping sensitive data privacy in Online Social Network (OSN) by using 'searchable encryption' technique. 
+This report outlines the doctoral research on solving sensitive data privacy issue in Online Social Network (OSN) by using 'searchable encryption' technique. 
+
 \section{Background of Problem}
 OSN is highly popular for many years. Services such as Facebook, Twitter and WeChat allow individuals to create their online profiles, make cyberspace connection with friends via these platforms. 
 
 A result of the huge growth of OSN is more and more sensitive personal data is revealed while OSN users enjoy using it. In 2005, two researchers from Carnegie Mellon University conducted a study in the online behaviour of more than 4,000 students in the university who had signed up in Facebook \cite{gross2005information}. In their study, they found that the majority of Facebook users at CMU provided astonishing amount of sensitive information in their Facebook profiles: it may contain their real names (over $90\%$), date of birth ($87\%$), personal images ($80\%$) and so on; actually, privacy preference settings are provided for OSN user to control the searchability, visibility and access privilege of their profiles, but it is sparingly used, which make them searchable and identifiable to the vast majority of anybody else in the network. 
 
-Due to the richness and variety of sensitive information disclosed in OSN, the privacy of these data is of critical importance to OSN users, as the permissive and unconcerned uses of sensitive information will put themselves at risk for many attacks from the cyberspace or even the real world: the precise personal information helps potential adversaries to construct more deceitful fraud messages (e.g. Context-Aware Spam \cite{brown2008social}); it also can be used to re-identify some anonymous datasets like hospital medical information by matching the common attributes \cite{sweeney2002k}; additionally, OSN users may be easily stalked as they revealed their location or timetable when they shared their activities to their friends.
+Due to the richness and variety of sensitive information disclosed in OSN, the privacy of these data is of critical importance to OSN users, as the permissive and unconcerned uses of sensitive information will put themselves at risk for many attacks from the cyberspace or even the real world: The precise personal information helps potential adversaries to construct more deceitful fraud messages (e.g. Context-Aware Spam \cite{brown2008social}); it also can be used to re-identify some anonymous datasets like hospital medical information by matching the common attributes \cite{sweeney2002k}; additionally, OSN users may be easily stalked as they revealed their location or timetable when they shared their activities with their friends.
 
-Although the main purposes of OSN are to help its members to communicate with others and maintain social relations in a more convenient and affordable way, OSN service providers also design diverse Social Network Services(SNS) for its user interaction virtually: it includes updating activities and location information, sharing multimedia (e.g. photo, video) and events, getting updates and comments on activities by friends, etc.. All of these services retain a huge amount of data from its users: until 2013, there were 1.11 billion monthly active users and they put 4.75 billion shared items in Facebook, these contents received over 4.5 billion 'Likes' from their friends \cite{facebook2013growth}. 
+Although the main purposes of OSN are to help its members to communicate with others and maintain social relations in a more convenient way, OSN service providers also design diverse Social Network Services (SNS) for its user interaction virtually: it includes updating activities and location information, sharing multimedia (e.g. photo, video) and events, getting updates and comments on activities by friends, etc.. All of these services retain a huge amount of data about its users: Until 2013, there were 1.11 billion monthly active users and they put 4.75 billion shared items in Facebook, these contents received over 4.5 billion 'Likes' from their friends \cite{facebook2013growth}. 
 
-Making these data searchable to further enhance to capabilities of OSN had become an interesting topic in recent years. In 2013, Facebook introduced their social network search engine -- Graph Search \cite{facebook2013graph}. This search engine aims to return the information based on the content from user's social network of friends and connections: for example, you may search ``The restaurants visited by friends live in Melbourne'' to get more personally relevant results. The concept of Graph Search is also introduced by other OSN service provider: LinkedIn has Job Search Engine which is based on user's location, skill as well as the information from their colleague and alumni; WeChat also can search user-specific content from Moments and Official Accounts. 
+Making these data searchable to further enhance to capabilities of OSN had become an interesting topic in recent years. In 2013, Facebook introduced their social data search engine -- Graph Search \cite{facebook2013graph}. This search engine aims to return the information based on the content from user's social network of friends and connections (their social circle): For example, users may search ``The restaurants visited by friends live in Melbourne'' to get restaurants recommendation from their friends in Melbourne. The search results are more personally relevant and satisfactory because the results are generated and refined by users' social circle where the people within always have some similar or the same attributes (e.g. geographical location, hobbies, education background etc.) according to ``Homophily'' theory \cite{mcpherson2001birds}. The concept of Graph Search is also introduced by other OSN service provider: LinkedIn has Job Search Engine which is based on user's location, skill as well as the information from their colleague and alumni; WeChat also can search user-specific content from Moments and Official Accounts. 
 
-In a nutshell, Graph Search-like search engines are powerful tools as it makes search result . Therefore, by extracting search results from friends, people with similar or the same attributes (e.g. geographical location, hobbies, etc.) are likely to become friend \cite{mcpherson2001birds}. 
+In a nutshell, Graph Search-like search engines are powerful tools from the aspect of search because the search results are from a more reliable source (i.e. social circle) and more user-centric. However, they make user data searchable and then provide an extremely simple way to unearth user sensitive data: For instance, potential adversaries now can easily construct a query like ``Friends in Melbourne working/traveling outsides'' to find break-in crime targets. As a result, these new social data search engines (``Graph Search'' is used to represent them) cause increasing privacy concerns to the public, and, to improve user's privacy in the context of Graph Search becomes the main motivation of this research.
+
 \section{Research Questions}
+In general, this research is going to answer following question:
+\begin{quotation}
+{ \bf How can we improve user's privacy in Graph Search?}
+\end{quotation}
 
-\section{Significance of Research}
+% improve users' privacy in the context of Graph Search
+% designing privacy preserving scheme
+% satisfies searchable and confidential requirements
+% goals users can use Graph Search
+
+Indeed, there are multiple paths to tackle with the privacy issue of Graph Search. On the one hand, if all users are wisdom enough to setup their privacy preference properly, their sensitive data will only be available to trusted friends which helps them to preserve their privacy towards the public, but OSN user profiles always get stored in a outsourced database where the OSN service providers have full privilege to access them, even though those providers are trusted, they may allow some untrusted third-parties to use the search functions to make money \cite{nytime2012facebook, time2013twitter}. On the other hand, providing fully encrypted data to OSN providers can even avoid the abuse of sensitive data but the search functions are then failed because it highly depends on users' data. 
+
+
+
+\begin{quotation}
+{\bf How can we design a privacy preserving scheme that satisfies both searchable and confidential requirements so that OSN users can use Graph Search securely?}
+\end{quotation}
+
+\section{Research Scope}
+After providing the general research question of this research, the scope of this research will be defined in this section. 
+
+\begin{itemize}
+\item{\bf Secure Index System.} To keep the usability of Graph Search, this research will utilise the secure index system 
+\item{\bf Search Function Extension.}
+\item {\bf Large Scale Deployment and Evaluation.} The proposed system of this research targets to deploy in 
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
