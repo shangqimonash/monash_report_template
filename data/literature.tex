@@ -1,21 +1,69 @@
 \chapter{Literature Review}
 
 \section{Privacy Preserving Scheme for OSN}
-There have been several schemes proposed to preserve the data privacy for data sharing in OSN: Guha et al. proposed NOYB \cite{guha2008noyb} which can break personal profile to multiple atoms and mix them into the crowd, it then provides confused profile to OSN. In this system, authorised users possess a part of secret can recover the real personal information associated with specific users while unauthorised users only get a mixture of personal data from the crowd. NOYB is able to protect the privacy of user profile but it doesn't work for user relations and interactions. 
-In comparison, Persona \cite{baden2009persona} solves above issue by applying cryptographic primitive (i.e. Attribute-based Encryption (ABE)). ABE can help to apply access control over a group of users in OSN. The ability to associate the attributes of user with a key provides a convenient way for group manager to grant different access privileges to different groups. Users within those groups use the key to access the group manager's sensitive data, so each group's access to the sensitive data is properly restricted, which guarantees the privacy of group manager. 
-As NOYB and Persona put encrypted content into OSN, OSN is hard to provide services to the users of these external tools. Lockr \cite{tootoonchian2009lockr} provides Social Attestation mechanism and Social Access Control Lists to control the access of sensitive data, hence, it can achieve fine-grained access control without data encryption. Furthermore, Social Attestation mechanism makes it easier for key revocation as it has a explicit expire date. In contrast, Persona needs to re-issue a new key to all remaining users in the group. Another benefit for using Lockr applies proof of knowledge protocol.
- to ensures the non-transferability of sensitive data -- third parties sites cannot abuse these sensitive data because they will not receive the actual identifier of users under the protocol.
+Numerous works have proposed to preserve the sensitive data privacy in OSN, and two strategies are mainly applied in these works: Data Decentralisation and Cryptography
+
+\subsection{Data Decentralised}
+Decentralised solutions attempt to provide social services through a collection of independent nodes and users can control their data in a flexible way:
+
+{\bf Decentralised OSN in Peer-to-Peer overlays:} PeerSoN \cite{buchegger2009peerson} and Safebook \cite{cutillo2009safebook} build a decentralised social network in Peer-to-Peer (P2P) overlays. Users can store their data in their local device and on the devices of their trusted friends, they consist of two parts: a distributed hash table (DHT) is used provide lookup service to find users and the data they store; and the P2P network offers direct data exchange between users' devices. In these social network, users are granted full privilege to control their data as well as the communication channel over P2P network: they can choose to either establish communication via their real-life trust \cite{cutillo2009safebook}, or the encrypted channel \cite{buchegger2009peerson}.
+
+{\bf Decentralised OSN in outsourced storage:} Diaspora \cite{diaspora2017diaspora} and Confidant \cite{liu2011confidant} create the decentralised social network by decoupling users's data with the SNS. Users are asked for keeping their data in some trusted server, and then, the scheme can generate some data descriptors and use them to request the SNS from existing OSN. Others can read and retrieve the data from trusted server via a valid descriptor and an appropriate access privilege. In comparison, Persona \cite{baden2009persona} allows its user keeping their data in untrusted server by using cryptographic techniques, and Cachet \cite{nilizadeh2012cachet} uses the idea from P2P network to further address the performance issue in decentralised system by introducing social cache over DHT.
+
+However, decentralised solutions without cryptography are considered as insufficient approaches for solving the privacy issue of OSN. The reason for it is because of the main purpose of these decentralised solutions is to provide access control by users' preference, and this functionality is overlap with OSN access control settings \cite{narayanan2012critical}. In addition, existing OSN service providers have ability to enforce the access control policy in a better way: For example, it is easier for a centralised OSN service provider to stop crawlers and makes their users' data invisible to search engines. Also, some OSN give ``nudge''  when users intent to reveal their sensitive data \cite{mori2010nudge}, but a decentralised system may not work properly in above cases, because its implementation only needs to fit the protocol but does not consider such details.
+
+\subsection{Cryptography}
+Cryptographic solutions protect the sensitive data via encryption, these solutions are preferred in public social network because it achieve access control by making data unreadable instead of enforcing some protocols, which is considered as more reliable way to stop unauthorised access.
+
+{\bf Index Obfuscation:} NOYB \cite{guha2008noyb} stores users' data with untrusted service providers, but the index of these data is obfuscated by cryptographic technique. In this system, authorised users possess a part of secret can recover the real index and personal information associated with specific users while unauthorised users only get a mixture of arbitrary personal data from the crowd. NOYB is able to protect the privacy of user profile but it doesn't work for user relations and interactions. 
+
+{\bf Attribute Based Encryption:} Persona \cite{baden2009persona} uses cryptographic primitive (i.e. Attribute Based Encryption (ABE)) to enforce access control over a group of users in OSN. The ability to associate the attributes of user with a key provides a convenient way for group manager to grant different access privileges to different groups. Users within those groups use the key to access the secret key of group manager as well as his/her sensitive data, so each group's access to the sensitive data is properly restricted, which guarantees the privacy of group manager. In Persona, key revocation is not efficient because it needs to re-issue a new key to all remaining users in the group. To address this issue, Sun et al. \cite{sun2010privacy} and Jahid et al. \cite{jahid2011easier} achieve efficient key revocation by using broadcast encryption.
+
+{\bf Private Social Relationship: } Lockr \cite{tootoonchian2009lockr} separates social relationship from OSN service providers by providing Social Attestation mechanism and Social Access Control Lists. Furthermore, Social Attestation mechanism makes it easier for key revocation as it has a explicit expire date. Another benefit for using Lockr applies proof of knowledge protocol to ensures the non-transferability of sensitive data -- third parties sites cannot abuse these sensitive data because they will not receive the actual identifier of users under the protocol. Some other scheme also proposed private social relationship based on privacy homomorphisms \cite{domingo2008privacy} or Blind Signature \cite{de2012hummingbird}.
  
-There are lots of research works with various primitives aiming to preserve the sensitive data privacy in OSN, such as homomorphic encryption \cite{domingo2008privacy}, peer-to-peer (P2P) overlays \cite{cutillo2009safebook}. 
+Above cryptographic solutions protect users' privacy generally following two steps:
+\begin{enumerate}
+\item Encrypt data and put it into some public accessible storages.
+\item Authorised users use their key to access, decrypt and use it.
+\end{enumerate}
+However, this procedure infers the dilemma when we want to integrate OSN services with the schemes: Most of the OSN services are deployed in server side, if the data in server side is encrypted, it can't be used to support the OSN services.
+
+\section{Graph Search}
+Graph Search \cite{facebook2013graph} is a typical OSN service to enrich the users' experience of using OSN. Nonetheless, it significantly improves users' search ability over user-generated data in OSN. To reach this goal, Facebook conducted a research about the social graph based on the large amount of the users' data they possessed, and they concluded that although there are billions of nodes representing the entities (e.g. users and user-generated contents like photos, pages) in social graph, the graph is very sparse because a typical node only have less than a thousand edges describing relations (e.g. friends, likes, tags) between nodes. Intuitively, it is better to represent the graph as a set of adjacency lists of users' id, and an inverted index it by edges \cite{curtiss2013unicorn}. Hence, Graph Search service is built upon the backend inverted index service for edges, and achieve a very low query delay (11 ms in average for finishing a query with 6 million results) for querying the entities such as friends, places, pages, etc.. Furthermore, Graph Search allows more complex queries such as graph traversal to find entities which are more than one edge away from source and it only takes 2000 ms at most for a 100 thousand results query. 
+
+Graph Search highly depends on users' data especially their relations to build its inverted index system. It is obvious that it can not be deployed in decentralised system as the relations are distributed in different network. Prior cryptographic solutions also have met the same dilemma that the system can not build inverted index to support Graph Search with encrypted data. To compatible with Graph Search, searchable encryption is introduced to guarantee the usability of Graph Search service by using cryptographic encrypted data.
 
 \section{Searchable Encryption}
-Searchable Encryption (SE) aims to provide abundant search functionalities on the server side, without decrypting the data itself.
-\begin{itemize}
-\item Searchable Symmetric Encryption (SSE): Song et al. [5] proposed an efficient scheme for storing and retrieving encrypted data from remote database. The encryption and search algorithms only need O(n) (n is the size of query) to perform its work, and the scheme is indistinguishable against chosen plaintext attacks [6];
-\item Publickeyencryptionwithkeywordsearch(PEKS):TheschemeproposedbyBonehet al. [7] allows others to read the message (e.g. e-mail services). They further revised it [8] to hide access pattern from service providers. However, this approach?s overhead in search time is O(n2), far less efficient than SSE.
-\end{itemize}
-Curtmola et al. [9] extended definition of SSE because they found that the security of index and trapdoor has inherently link. To guarantee the keyword will not leak from trap- door, [9] introduced two new model, a non-adaptive and an adaptive one. The adaptive one allow query as a function of previously obtained trapdoors and search outcomes, and is considered a strong security scheme.
-Recently, Cash et al. [10] proposed dynamic and multi-keyword search in large database in cloud system. Cash?s work [10] encrypts a clear-text database to get encrypted database (EDB). By randomly storing data in database, the database can hide the relationship of clear- text database. Their evaluation shows the new search method is very effective for very large dataset (10s in MySQL database with terabytes-scale and billions of record-keyword pairs). Nonetheless, it also exists leakage in [10], as it discloses many information to server, and the server may be able to restore sensitive data of user.
+Graph Search makes use of users' data storing on their server to generate its inverted indexes, Searchable Symmetric Encryption (SSE) can offer a potential better solution for privacy issues in this data outsourcing case. 
+
+{\bf SSE with Index:} The first SSE scheme is proposed by Song et al. \cite{song2000practical}, but his construction doesn't have an index to accelerate keyword search. However, index based SSE protocols have been proposed to support secure index, each more efficient than its predecessor: The first secure encrypted index was proposed in \cite{goh2003secure}, based on form of forward index, storing for each document a Bloom filter containing all the document's keywords. This allows a single document to be searched in a constant time but requires each document to be checked in turn which gains a search complexity proportional to the number of documents.
+
+Curtmola et al. \cite{curtmola2011searchable} are the first to propose to use inverted-index data structure, storing in a hash table for each keyword, the encrypted IDs of the documents that contain it (while hiding the number of documents matching each keyword), resulting in complexity proportional to the number of matching results, even for searching the whole document collection. However, \cite{curtmola2011searchable} does not support multiple keyword conjunctive queries efficiently; it has complexity proportional to the number of documents matching the most frequent queried keyword. Later, \cite{cash2013highly} presented the OXT protocol, extending \cite{curtmola2011searchable} by adding a `Cross-Tag Set' (XSet) data structure, which lists hashed pairs of keywords and IDs of documents containing them, and reducing search complexity to be proportional to the number of results matching the least frequent queried keyword.
+
+{\bf Security Definition and Leakage of SSE:} The studies of SSE security definition started from \cite{goh2003secure}, their definition can make sure that adversaries can not deduct document's content from its index, but it doesn't consider the security of search tokens (trapdoors for searching) However, Curtmola et al. \cite{curtmola2011searchable} pointed out that the security of indexes and the security of trapdoors are inherently linked. In his definition, a SSE is secure if it reveals any information about the documents and the indexes besides the outcome and the pattern of the searches. Chase and Kamara \cite{chase2010structured} extended their definition to more general structured encryption, as SSE is only a special case of structured encryption.
+
+Oblivious RAM (ORAM) allows SSE with no leakage \cite{goldreich1996software}. However, it requires communication rounds and search complexity poly-logarithmic in the database size.To balance the efficiency and security of SSE, almost all of the practical schemes leak information about documents based on current security definition.
+
+\section{Searchable Encryption on Graph}
+The researches about Searchable Graph Encryption are very limited: The notion of Graph Encryption was introduced in \cite{chase2010structured}. In \cite{chase2010structured}, several construction were proposed to answer Adjacency Queries (give two nodes, do they have a common edge?), Neighbour Queries (get all nodes will a common edge) and Labeled Graph Queries (search graph with some labels in nodes) in encrypted graph.
+
+Meng et al. \cite{meng2015grecs} proposed graph encryption schemes that support shortest distance query on graph encryption. Their construction is based on distance oracle instead of Dijkstra's algorithm so their algorithm can only get an approximation of shortest distance but enabling them to search on a large-scale graph.
+
+\section{Field of Research}
+As a conclusion of literature review, The privacy issue in OSN and its solutions are studied for many years, but none of them fit the context of Graph Search due to its searchable requirement. Since the lack of work about Searchable Encryption on Graph, this research will try to apply the concept of SSE on Graph Search. The new privacy preserving scheme will be designed on the basis of Searchable Graph Encryption, and its performance of security will be further investigated as well as the efficient on large scale graph in distributed environment.
 
 
-5. Summary the link between sensitive data privacy and Searchable Encryption 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
