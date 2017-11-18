@@ -1,6 +1,4 @@
 \chapter{Research Problem}
-This report outlines the doctoral research on solving sensitive data privacy issue in Online Social Network (OSN) by using 'searchable encryption' technique. 
-
 \section{Background of Problem}
 OSN is highly popular for many years, and more and more Internet users start to use OSN as their medium of communication: The monthly active user of Facebook is reached 2 billion in 2017, which means over one half Internet users are using the services from Facebook \cite{statista2017facebook, itstat2017population}, and this is just an epitome of the today's OSN dependency.
 
@@ -12,32 +10,33 @@ Although the main purposes of OSN are to help its members to communicate with ot
 
 Making these data searchable to further enhance to capabilities of OSN had become a prevailing trend in recent years. In 2013, Facebook introduced their social data search engine -- Graph Search \cite{facebook2013graph}. This search engine aims to return the information based on the content from user's social network of friends and connections (their social circle): For example, users may search ``The restaurants visited by friends live in Melbourne'' to get restaurants recommendation from their friends in Melbourne. The search results are more personally relevant and satisfactory because the results are generated and refined by users' social circle where the people within always have some similar or the same attributes (e.g. geographical location, hobbies, education background etc.) according to ``Homophily'' theory \cite{mcpherson2001birds}. The concept of Graph Search is also introduced by other OSN service provider: LinkedIn has Job Search Engine which is based on users' location, skill as well as the information from their colleague and alumni; WeChat also can search user-specific content from Moments and Official Accounts. 
 
-In a nutshell, Graph Search-like search engines are powerful tools from the aspect of search because the search results are from a more reliable source (i.e. social circle) and more user-centric. However, they make user data searchable and then provide an extremely simple way to unearth user sensitive data: For instance, potential adversaries now can easily construct a query like ``Friends in Melbourne working/traveling outsides'' to find break-in crime targets. As a result, these new social data search engines (``Graph Search'' is used to represent them) cause increasing privacy concerns about OSN to the public, and, to protect user's privacy in the context of Graph Search becomes the main motivation of this research.
+In a nutshell, Graph Search-like search engines are powerful tools from the aspect of search because the search results are from a more reliable source (i.e. social circle) and more user-centric. However, they make user data searchable and then provide an extremely simple way to unearth user sensitive data: For instance, potential adversaries now can easily construct a query like ``People in Melbourne working/traveling outsides'' to find break-in crime targets. As a result, these new social data search engines (``Graph Search'' is used to represent them) cause increasing privacy concerns about OSN to the public, and, to protect user's privacy in the context of Graph Search becomes the main motivation of this research.
 
 \section{Research Questions}
 In general, this research is going to answer following question:
 \begin{quotation}
-{ \bf How can we design a privacy preserving scheme to protect user's privacy in OSN?}
+{ \bf How can we design privacy preserving algorithm to protect user's privacy in Graph Search?}
 \end{quotation}
 in the context of today's OSN dependency and the inevitable trend of Graph Search wide deployment.
 
 \section{Research Scope}
-After providing the research question of this research, the scope of this research will be defined in this section. Indeed, there are multiple solutions to secure users' privacy in OSN, since the limited time and resource for this research, it will focus on solving privacy issue of Graph Search by addressing the following key technical points:
+After providing the research question, the scope will be defined in this section. Indeed, there are multiple solutions to secure users' privacy in OSN, since the limited time and resource for this research, it will focus on solving privacy issue of Graph Search by addressing the following key technical points:
 \begin{itemize}
 \setlength{\itemsep}{0pt}
-\item{\bf Cryptographic Model for Graph Search.} Cryptographic solutions are preferred in outsourced cloud service likes OSN because it can stop the privacy invasion not only from malicious adversaries, but also from untrusted service providers. However, most of cryptographic technique makes data unsearchable which contradicts to the searchable requirement of Graph Search. This research attempts to design an privacy preserving Graph Search model which can protect users' privacy by using cryptography without compromising the ability to search.
-\item{\bf Search with Secure Index.} Search algorithms usually use a precomputed index. This allows keyword searches to be performed in essentially constant time with respect to the size of the database. In our privacy preserving Graph Search model, Secure index is necessary part for the security of users' data as well as the efficiency of search. This research will seek the solution for efficient and secure index building upon unencrypted index (e.g. forwarded index, inverted index) to index encrypted graph data.
+\item{\bf Cryptographic Model for Graph Data.} Cryptographic solutions are preferred in outsourced cloud service likes OSN because it can stop the privacy invasion not only from malicious adversaries, but also from untrusted service providers. However, most of cryptographic technique makes data unsearchable which contradicts to the searchable requirement of Graph Search. This research first attempts to design an privacy preserving Graph data model which can protect users' privacy by using cryptography without compromising the ability to search.
+\item{\bf Search with Secure Index.} Search algorithms usually use a precomputed index. This allows keyword searches to be performed in essentially constant time with respect to the size of the database. In our privacy preserving Graph Search model, Secure index is the necessary part for the security of users' data as well as the efficiency of search. This research will seek the solution for efficient and secure index building upon unencrypted index (e.g. forwarded index, inverted index) to index encrypted graph data.
 \item{\bf Search on Encrypted Graph.} The main block of this research is about performing search on Encrypted Graph. This is a special case of structured search \cite{chase2010structured}. However, comparing with the most well-studied class of structured encryption -- searchable symmetric encryption (SSE), the studies of Graph Encryption and its search functions are limited.
-\item {\bf Large Scale Deployment.} Deploying the privacy preserving scheme into a extensive graph to enable private graph search on it is the final objective of this research, a formal security analysis and an evaluation in big dataset will be presented to verify its performance in security as well as in efficiency over Big Data. 
+\item {\bf Large Scale Deployment.} Deploying the privacy preserving search functions into a extensive graph to enable private Graph Search on it is the final objective of this research, a formal security analysis will be presented in advance to verify the performance of proposed algorithm in security. And the search functions will implement as privacy preserving schemes based on the search algorithms for Graph Encryption in Hadoop (Facebook use it to build their Graph Search backend \cite{curtiss2013unicorn}). Finally, the schemes will be deployed upon extensive graph data to simulate the scenario of Graph Search and an evaluation in large dataset will be presented to verify its performance in query delay, system throughput and cryptographic primitives overhead over Big Data. 
+
 \end{itemize}
 
-As mentioned above, this research aims to design privacy preserving model of Graph Search by using cryptography, so it will not model and design novel cryptographic primitives. 
+As mentioned above, this research aims to design privacy preserving algorithm of Graph Search by using cryptography, it will not design novel cryptographic primitives. 
 
-
-
-
-
-
+\section{Contributions}
+This research focuses on the research questions about the privacy issues on Graph Search and solve it by designing cryptography based privacy preserving schemes for Graph Search with rich search functions. 
+To facilitate cryptography under the searchable requirement of Graph Search, a new model will be designed to enable efficient search over cryptographic protected graph. Several search functions will be adapted on the basis of the model to extend the search ability on encrypted graph. 
+A formal security analysis will be given to verify the security performance of this new model. This analysis plays an important role to justify that users' privacy in graph can be protected under this model and the search functions which are based on it. 
+Once the new model is fully defined, it will be implemented as several privacy preserving schemes and deployed on large scale graph for evaluation in different query use-case. The evaluation serves as a efficiency test by showing the overhead from cryptography is affordable, additionally, it also shows the practicality of the schemes as it supports rich search functions.
 
 
 
