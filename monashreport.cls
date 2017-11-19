@@ -91,7 +91,7 @@
 
 %%%%%%%%other settings%%%%%%%%
 \RequirePackage{setspace}
-\hyphenation{Safe-book Twi-tter app-roaches boo-lean com-ponent cyber-space key-word po-int-ed star-t-ed techno-logy re-commendation}
+\hyphenation{Safe-book Twi-tter ab-o-ve app-roaches boo-lean com-ponent cyber-space key-word po-int-ed star-t-ed techno-logy re-commendation}
 
 % front matter before main body
 \renewcommand{\frontmatter}{%

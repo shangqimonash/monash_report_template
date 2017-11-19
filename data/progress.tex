@@ -14,7 +14,8 @@ The HXT SSE protocol uses the following primitives (for security parameter $\lam
 \item Psuedorandom functions (PRFs) $F$ with range $1^{\lambda}$, $F_p$ with range $\mathbf{Z}^\ast_p$ and  $F_j$ with range $[m]$ for $j=1,\ldots,k$.
 \end{itemize}
 
-The HXT protocol consists of two algorithms: $\mathbf{EDBSetup}$ and $\mathbf{Search}$. 
+Likes other SSE schemes, HXT protocol consists of two algorithms: $\mathbf{EDBSetup}$ to create encrypted database and $\mathbf{EDBSearch}$ to query the result from EDB.
+ 
 The setup algorithm $\mathbf{EDBSetup}$ gets the security parameter $\lambda$ and returns $mk$, $param$, and $\mathbf{EDB}$. The encrypted database $\mathbf{EDB}$ has two components: $\mathbf{EDB}(1)$ is $\mathbf{HVE}$  generated exactly as in OXT, and $\mathbf{EDB}(2)$ is an $\mathbf{XSet}$ encryption of a carefully designed Bloom filter $\mathbf{BF}$ set up for $\mathbf{XSet}$ elements of the form $h (\mathbf{id}, w) = g^{F_p (\kappa_X, w ) \cdot \mathbf{xid}}$, for encrypted identifiers $\mathbf{xid}=F_p(\kappa_I,\mathbf{id})$ over all $\mathbf{id}\in\mathbf{DB}(w)$. In particular, this algorithm writes $1$'s into $\mathbf{BF}$ in positions in set 
 $$S =\{h_j(\kappa_j,h(\mathbf{id},w))\}_{1\leq j \leq k},$$ 
 over all $(\mathbf{id},w)$ pairs with $\mathbf{id}\in\mathbf{DB}(w)$, and then encrypts $\mathbf{BF}$ with $\mathbf{HVE}$.
@@ -28,9 +29,6 @@ Currently the implementation of this scheme in Hadoop is finished and a comparab
 The paper of HXT is writing in progress, we will test the HXT protocol in a larger dataset as a supplementary result for its efficiency in large scale database. We plan to submit this paper to IEEE S\&P by 1st Dec.
 
 HXT is a more secure SSE protocol that support boolean query functions, and it is also indexed by inverted index. Hence, HXT can serve as a building block of my Searchable Graph Encryption by providing secure and efficient boolean query functions.
-
-\section{Courseworks}
-To meet the coursework requirements, I've get exemption for one compulsory module and attend another one as well as the compulsory events and workshops in FIT 5144 in the first year. However, there are some issues with my grades in FIT6021 module ``Modelling and Computer Simulation''. Table \ref{tlb:coursework} shows the detailed information about my coursework activities. 
 
 \begin{table}[h]
 \centering
@@ -58,9 +56,12 @@ To meet the coursework requirements, I've get exemption for one compulsory modul
 & Philosophical Approaches of Ethic & completed \\ \hline
 & Ethic in Publication and Authorship & completed \\ \hline
 \end{tabular}
-\caption{Coursework Activties and Claimed Hours}
+\caption{Coursework Activities and Claimed Hours}
 \label{tlb:coursework}
 \end{table}
+
+\section{Courseworks}
+To meet the coursework requirements, I've get exemption for one compulsory module and attend another one as well as the compulsory events and workshops in FIT 5144 in the first year. However, there are some issues with my grades in FIT6021 module ``Modelling and Computer Simulation''. Table \ref{tlb:coursework} shows the detailed information about my coursework activities. 
 
 Apart from the compulsory 58 hours' events and workshops listed above, I also attend GSAS Oral Presentations Workshops, Preparing for Confirmation Workshops; The Data61 reading group; Dean's Seminar Series; Staff Appointment Seminar in FIT as elective activities to fulfil the requirement of 120 hours activities attending record for FIT5144.
 
